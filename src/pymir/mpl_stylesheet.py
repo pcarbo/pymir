@@ -5,12 +5,12 @@ from matplotlib import cycler
 ## https://matplotlib.org/users/customizing.html
 ## How to change color and plot styles? 
 ## https://matplotlib.org/users/dflt_style_changes.html
-## matplotlib.rcParams[] = 
+## matplotlib.rcParams[] =
 
 def banskt_presentation(dpi = 300, linewidth = 2, ticksize = 8, 
-                        fontsize = 28, fontfamily = 'latex', 
+                        fontsize = 14, fontfamily = 'latex-clearsans',
                         padding = 10, 
-                        black = '#333333', splinecolor = None, textcolor = None, colors = 'banskt'):
+                        black = '#333333', splinecolor = "#C6C6C6", textcolor = None, colors = 'banskt'):
 
     if colors == 'banskt':
         mcolors = banskt_colors()
@@ -99,8 +99,8 @@ def banskt_presentation(dpi = 300, linewidth = 2, ticksize = 8,
     matplotlib.rcParams['ytick.minor.width'] = linewidth
     matplotlib.rcParams['xtick.color'] = splinecolor
     matplotlib.rcParams['ytick.color'] = splinecolor
-    matplotlib.rcParams['xtick.labelcolor'] = textcolor
-    matplotlib.rcParams['ytick.labelcolor'] = textcolor
+    #matplotlib.rcParams['xtick.labelcolor'] = textcolor
+    #matplotlib.rcParams['ytick.labelcolor'] = textcolor
 
     # Color cycle
     matplotlib.rcParams['axes.prop_cycle'] = cycler('color', mcolors)
