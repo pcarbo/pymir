@@ -20,8 +20,8 @@ def banskt_presentation(dpi = 300, linewidth = 2, ticksize = 8,
         mcolors = wanwan_colors()
 
 
-    if textcolor is None:   textcolor = black
-    if splinecolor is None: splinecolor = black
+    if textcolor is None   or textcolor == 'black':   textcolor = black
+    if splinecolor is None or splinecolor == 'black': splinecolor = black
 
     if fontfamily == 'latex':
         matplotlib.rcParams['text.latex.preamble'] = r'\usepackage[sfdefault,scaled=.85, lining]{FiraSans}' + \

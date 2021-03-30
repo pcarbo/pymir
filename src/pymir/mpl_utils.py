@@ -43,8 +43,6 @@ def decorate_axes(ax, hide= ["top", "right"], ticklimits = False, pads = [20, 10
     return
 
 
-
-
 def float_range(xmin, xmax, sep):
     res = list(np.arange(xmin, xmax, sep))
     # sometimes the last float is ignored due to floating point error
@@ -165,7 +163,7 @@ def get_ticks(x0, x1, kmin, kmax, scale = 'linear', spacing = 'linear'):
     return tpos, tmarks
 
 
-def set_yticks(ax, kmin = 2, kmax = 6, scale = 'linear', spacing = 'linear', tickmarks = None):
+def set_yticks(ax, kmin = 2, kmax = 6, scale = 'linear', spacing = 'linear', tickmarks = None, rotation = 0):
     if tickmarks is None:
         y0, y1 = ax.get_ylim()
         tpos, tmarks = get_ticks(y0, y1, kmin, kmax, scale = scale, spacing = spacing)
@@ -173,11 +171,11 @@ def set_yticks(ax, kmin = 2, kmax = 6, scale = 'linear', spacing = 'linear', tic
         tpos = scale_list(tickmarks, scale = scale)
         tmarks = tickmarks.copy()
     ax.set_yticks(tpos)
-    ax.set_yticklabels([f"{x}" for x in tmarks])    
+    ax.set_yticklabels([f"{x}" for x in tmarks], rotation = rotation)
     return
 
 
-def set_xticks(ax, kmin = 2, kmax = 6, scale = 'linear', spacing = 'linear', tickmarks = None):
+def set_xticks(ax, kmin = 2, kmax = 6, scale = 'linear', spacing = 'linear', tickmarks = None, rotation = 0):
     if tickmarks is None:
         x0, x1 = ax.get_xlim()
         tpos, tmarks = get_ticks(x0, x1, kmin, kmax, scale = scale, spacing = spacing)
@@ -185,7 +183,7 @@ def set_xticks(ax, kmin = 2, kmax = 6, scale = 'linear', spacing = 'linear', tic
         tpos = scale_list(tickmarks, scale = scale)
         tmarks = tickmarks.copy()
     ax.set_xticks(tpos)
-    ax.set_xticklabels([f"{x}" for x in tmarks])
+    ax.set_xticklabels([f"{x}" for x in tmarks], rotation = rotation)
     return
 
 
@@ -214,4 +212,18 @@ def set_xmax(ax, xmax, scale = 'linear'):
     x0, x1 = ax.get_xlim()
     x2 = scale_list([xmax], scale)[0]
     ax.set_xlim([x0, x2])
+    return
+
+
+def set_ymin(ax, ymin, scale = 'linear'):
+    y0, y1 = ax.get_ylim()
+    y2 = scale_list([ymin], scale)[0]
+    ax.set_ylim([y2, y1])
+    return
+
+
+def set_xmin(ax, xmin, scale = 'linear'):
+    x0, x1 = ax.get_xlim()
+    x2 = scale_list([xmin], scale)[0]
+    ax.set_xlim([x2, x1])
     return
