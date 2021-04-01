@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import bisect
 
 def lims_xy(ax):
     lims = [
@@ -163,10 +164,29 @@ def get_ticks(x0, x1, kmin, kmax, scale = 'linear', spacing = 'linear'):
     return tpos, tmarks
 
 
-def set_yticks(ax, kmin = 2, kmax = 6, scale = 'linear', spacing = 'linear', tickmarks = None, rotation = 0):
+'''
+Insert additional tick positions and tick markers in an already sorted
+list of positions and markers
+'''
+def force_insert_ticks(tpos, tmarks, tmarks_insert, scale = 'linear'):
+    tpos_insert = scale_list(tmarks_insert, scale = scale)
+    tpos_new = tpos.copy()
+    tmarks_new = tmarks.copy()
+    for pos, mark in zip(tpos_insert, tmarks_insert):
+        if mark not in tmarks_new:
+            idx = bisect.bisect_left(tpos_new, pos)
+            tpos_new.insert(idx, pos)
+            tmarks_new.insert(idx, mark)
+    return tpos_new, tmarks_new
+
+
+def set_yticks(ax, kmin = 2, kmax = 6, scale = 'linear', spacing = 'linear', tickmarks = None, 
+               rotation = 0, forceticks = None):
     if tickmarks is None:
         y0, y1 = ax.get_ylim()
         tpos, tmarks = get_ticks(y0, y1, kmin, kmax, scale = scale, spacing = spacing)
+        if forceticks is not None:
+            tpos, tmarks = force_insert_ticks(tpos, tmarks, forceticks, scale = scale)
     else:
         tpos = scale_list(tickmarks, scale = scale)
         tmarks = tickmarks.copy()
@@ -175,10 +195,13 @@ def set_yticks(ax, kmin = 2, kmax = 6, scale = 'linear', spacing = 'linear', tic
     return
 
 
-def set_xticks(ax, kmin = 2, kmax = 6, scale = 'linear', spacing = 'linear', tickmarks = None, rotation = 0):
+def set_xticks(ax, kmin = 2, kmax = 6, scale = 'linear', spacing = 'linear', tickmarks = None, 
+               rotation = 0, forceticks = None):
     if tickmarks is None:
         x0, x1 = ax.get_xlim()
         tpos, tmarks = get_ticks(x0, x1, kmin, kmax, scale = scale, spacing = spacing)
+        if forceticks is not None:
+            tpos, tmarks = force_insert_ticks(tpos, tmarks, forceticks, scale = scale)
     else:
         tpos = scale_list(tickmarks, scale = scale)
         tmarks = tickmarks.copy()
