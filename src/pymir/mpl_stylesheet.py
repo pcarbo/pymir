@@ -7,7 +7,7 @@ from matplotlib import cycler
 ## https://matplotlib.org/users/dflt_style_changes.html
 ## matplotlib.rcParams[] =
 
-def banskt_presentation(dpi = 300, linewidth = 2, ticksize = 8, 
+def banskt_presentation(dpi = 300, linewidth = 2, splinewidth = 2, ticksize = 8, 
                         fontsize = 14, fontfamily = 'latex-clearsans',
                         padding = 10, 
                         black = '#333333', splinecolor = "#C6C6C6", textcolor = None, colors = 'banskt'):
@@ -59,7 +59,7 @@ def banskt_presentation(dpi = 300, linewidth = 2, ticksize = 8,
     matplotlib.rcParams['axes.edgecolor'] = splinecolor
     matplotlib.rcParams['axes.facecolor'] = 'white'
     matplotlib.rcParams['axes.labelpad'] = 20
-    matplotlib.rcParams['axes.linewidth'] = linewidth
+    matplotlib.rcParams['axes.linewidth'] = splinewidth
     
     # Legend
     matplotlib.rcParams['legend.facecolor'] = 'inherit'
@@ -93,10 +93,10 @@ def banskt_presentation(dpi = 300, linewidth = 2, ticksize = 8,
     matplotlib.rcParams['xtick.minor.pad'] = padding
     matplotlib.rcParams['ytick.major.pad'] = padding
     matplotlib.rcParams['ytick.minor.pad'] = padding
-    matplotlib.rcParams['xtick.major.width'] = linewidth
-    matplotlib.rcParams['xtick.minor.width'] = linewidth
-    matplotlib.rcParams['ytick.major.width'] = linewidth
-    matplotlib.rcParams['ytick.minor.width'] = linewidth
+    matplotlib.rcParams['xtick.major.width'] = splinewidth
+    matplotlib.rcParams['xtick.minor.width'] = splinewidth
+    matplotlib.rcParams['ytick.major.width'] = splinewidth
+    matplotlib.rcParams['ytick.minor.width'] = splinewidth
     matplotlib.rcParams['xtick.color'] = splinecolor
     matplotlib.rcParams['ytick.color'] = splinecolor
     #matplotlib.rcParams['xtick.labelcolor'] = textcolor
