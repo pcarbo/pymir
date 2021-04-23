@@ -38,7 +38,7 @@ setuptools.setup(
     ],
     package_dir      = {"": "src"},
     packages         = ["pymir"],
-    python_requires  = ">=3.9",
+    python_requires  = ">=3.8",
     install_requires = [
         "numpy>=1.19.4",
         "matplotlib>=3.3.4",
